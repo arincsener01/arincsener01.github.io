@@ -1,0 +1,101 @@
+*{
+    
+    padding: 0;
+    margin: 0;
+    
+}
+body {
+    overflow-x: hidden;
+    overflow-y: hidden;
+} 
+.name{
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    font-size: 25px;
+    left: 150px;
+    top: 150px;
+    background: rgba(204, 204, 204, );
+}
+.currently{
+    position: relative;
+    color: white;
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    top: 175px;
+    left: 150px;
+}
+.info{
+    position: relative;
+    color: white;
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    top: 200px;
+    left: 150px;
+}
+.time{
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    position: relative;
+    top: 390px;
+    left: 750px;
+}
+#currentTime{
+    font-family: 'Courier New', Courier, monospace;
+}
+.place{
+    position: relative;
+    top: 25px;
+    left: -165px;
+}
+
+.bilkent{
+    color: azure;
+}
+.github{
+    color: red;
+}
+.linkedin{
+    color: blue;
+}
+.resume{
+    color: coral;
+}
+.contact{
+    color:chartreuse;
+}
+.game{
+    position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: aliceblue;
+    top: 25px;
+    left: 1470px;
+    cursor: pointer;
+    background: white;
+    padding: 5px;
+    border-radius: 50px;
+    transition: all ease 0.5s;
+}
+.game:hover{
+    left: 1450px;
+}
+@media (max-width: 950px) {
+    .game {
+        left: 100px;
+        rotate: -90deg;
+        top: -350px;
+        transition: all ease 0.5s; 
+        display: none;
+    }
+    /* .game img{
+        rotate: 90deg;
+    }
+    .game img:hover{
+        top: -330px;
+    } */
+    .currently{font-size: 14px;}
+    .info{font-size: 14px;
+    margin: 0 auto;
+    }
+    .time{left: 375px;}
+}
