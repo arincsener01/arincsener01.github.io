@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Simon Game</title>
+  <link rel="stylesheet" href="stylegame.css">
+  <link rel="icon" type="image/x-icon" href="a.d.s.png">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    
+</head>
+
+<body>
+  <h1 id="level-title">Press a Key to Start</h1>
+  
+  <div class="questions">
+    <img src="icon/questionmark.png" alt="Question Mark" class="questionmark">
+    <p>Press any key on your keyboard <br> to start. Try to repeat random <br> sequences of lights by clicking the <br> colored pads in the correct order. <br><br>
+    Cr: Angela Yu</p>
+  </div>
+  
+  <div class="container">
+    <div lass="row">
+
+      <div type="button" id="green" class="btn green">
+
+      </div>
+
+      <div type="button" id="red" class="btn red">
+
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div type="button" id="yellow" class="btn yellow">
+
+      </div>
+      <div type="button" id="blue" class="btn blue">
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+        $(".questions img").hover(function(){
+            $(".questions p").css("visibility", "visible");
+        }, function(){
+            $(".questions p").css("visibility", "hidden");
+        })
+
+        var buttonColours = ["red", "blue", "green", "yellow"];
+
+        var gamePattern = [];
+        var userClickedPattern = [];
+
+        var started = false;
+        var level = 0;
+
+        $(document).keypress(function() {
+        if (!started) {
+            $("#level-title").text("Level " + level);
+            nextSequence();
+            started = true;
+        }
+        });
+
+        $(".btn").click(function() {
+
+        var userChosenColour = $(this).attr("id");
+        userClickedPattern.push(userChosenColour);
+
+        playSound(userChosenColour);
+        animatePress(userChosenColour);
+
+        checkAnswer(userClickedPattern.length-1);
+        });
+
+        function checkAnswer(currentLevel) {
+
+            if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
+            if (userClickedPattern.length === gamePattern.length){
+                setTimeout(function () {
+                nextSequence();
+                }, 1000);
+            }
+            } else {
+            playSound("wrong");
+            $("body").addClass("game-over");
+            $("#level-title").text("Game Over, Press Any Key to Restart");
+
+            setTimeout(function () {
+                $("body").removeClass("game-over");
+            }, 200);
+
+            startOver();
+            }
+        }
+
+
+        function nextSequence() {
+        userClickedPattern = [];
+        level++;
+        $("#level-title").text("Level " + level);
+        var randomNumber = Math.floor(Math.random() * 4);
+        var randomChosenColour = buttonColours[randomNumber];
+        gamePattern.push(randomChosenColour);
+
+        $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
+        playSound(randomChosenColour);
+        }
+
+        function animatePress(currentColor) {
+        $("#" + currentColor).addClass("pressed");
+        setTimeout(function () {
+            $("#" + currentColor).removeClass("pressed");
+        }, 100);
+        }
+
+        function playSound(name) {
+        var audio = new Audio("sounds/" + name + ".mp3");
+        audio.play();
+        }
+
+        function startOver() {
+        level = 0;
+        gamePattern = [];
+        started = false;
+        }
+
+  </script>
+
+</body>
+
+</html>
